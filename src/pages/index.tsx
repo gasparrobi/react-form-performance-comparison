@@ -50,7 +50,6 @@ const Home: NextPage = () => {
               className="flex items-center gap-1 hover:underline"
             >
               <GithubIcon className="h-4 w-4" />
-              <span className="font-semibold">source code</span>
             </a>
           </div>
 
@@ -67,7 +66,6 @@ const Home: NextPage = () => {
               className="flex items-center gap-1 hover:underline"
             >
               <GithubIcon className="h-4 w-4" />
-              <span className="font-semibold">source code</span>
             </a>
           </div>
         </div>
