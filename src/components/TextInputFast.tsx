@@ -98,8 +98,8 @@ const TextInputFast = ({
 
         {isCheckmarkVisibleOnSuccess && (
           <span
-            className={`invisible absolute top-1/2 left-[calc(100%_-_30px)] h-0 w-0 origin-top-left -rotate-45 
-          border-b-[3px] border-l-[3px] border-transparent opacity-0 transition-[height,width] delay-[0ms,150ms] 
+            className={`_transition-[height,width] _delay-[0ms,150ms] invisible absolute top-1/2 left-[calc(100%_-_30px)] h-0 w-0 
+          origin-top-left -rotate-45 border-b-[3px] border-l-[3px] border-transparent opacity-0 
           peer-valid:visible peer-valid:h-[8px] peer-valid:w-[13px] 
           peer-valid:border-green-500 peer-valid:opacity-100`}
           ></span>
