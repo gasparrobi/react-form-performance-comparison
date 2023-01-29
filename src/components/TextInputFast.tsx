@@ -11,6 +11,7 @@ interface TextInputProps {
   name: string;
   required?: boolean;
   isCheckmarkVisibleOnSuccess?: boolean;
+  specialValidationMessage?: string;
   [x: string]: unknown;
 }
 
@@ -18,7 +19,8 @@ const TextInputFast = ({
   required,
   label,
   isCheckmarkVisibleOnSuccess = true,
-  ...rest
+  specialValidationMessage,
+  ...props
 }: TextInputProps): JSX.Element => {
   const [isInvalid, setIsInvalid] = useState(false);
   const [touched, setTouched] = useState(false);
@@ -27,20 +29,21 @@ const TextInputFast = ({
   const renderCounter = useRef(0);
   renderCounter.current += 1;
 
-  const _onChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    isTouched?: boolean
-  ) => {
-    const validity = e.currentTarget.validity.valid;
-    if (isInvalid === validity && (isTouched || touched)) {
+  const validateField = (e: React.ChangeEvent | React.FocusEvent) => {
+    const validity = (e.currentTarget as HTMLInputElement).validity.valid;
+    if (isInvalid === validity) {
       setIsInvalid(!validity);
     }
+  };
+
+  const _onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    touched && validateField(e);
   };
 
   const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     if (e.currentTarget.validity.valid) return;
     setTouched(true);
-    _onChange(e, true);
+    validateField(e);
   };
 
   const onInvalid = (event: React.InvalidEvent<HTMLInputElement>) => {
@@ -78,7 +81,7 @@ const TextInputFast = ({
           placeholder={label}
           required={required}
           onInvalid={onInvalid}
-          {...rest}
+          {...props}
         />
 
         <label
@@ -98,8 +101,15 @@ const TextInputFast = ({
         )}
       </div>
       {_isInvalid && (
-        <span className="absolute left-0 top-[calc(100%+3px)] text-xs font-semibold text-red-700">
-          This field is invalid: <span className="italic">invalid</span>
+        <span
+          role="alert"
+          className="absolute left-0 top-[calc(100%+3px)] text-xs font-semibold text-red-700"
+        >
+          {specialValidationMessage || (
+            <>
+              This field is invalid: <i>invalid</i>
+            </>
+          )}
         </span>
       )}
     </div>
