@@ -22,28 +22,29 @@ const TextInputFast = ({
   errorMessage,
   ...props
 }: TextInputProps): JSX.Element => {
-  const [isInvalid, setIsInvalid] = useState(false);
+  // const [isInvalid, setIsInvalid] = useState(false);
   const [touched, setTouched] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const renderCounter = useRef(0);
   renderCounter.current += 1;
 
-  const validateField = (e: React.ChangeEvent | React.FocusEvent) => {
-    const validity = (e.currentTarget as HTMLInputElement).validity.valid;
-    if (isInvalid === validity) {
-      setIsInvalid(!validity);
-    }
-  };
+  // with the :has selector there is no need to check for invalidity with js 🤯
+  // const validateField = (e: React.ChangeEvent | React.FocusEvent) => {
+  //   const validity = (e.currentTarget as HTMLInputElement).validity.valid;
+  //   if (isInvalid === validity) {
+  //     setIsInvalid(!validity);
+  //   }
+  // };
 
-  const _onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    touched && validateField(e);
-  };
+  // const _onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   touched && validateField(e);
+  // };
 
   const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     if (e.currentTarget.validity.valid) return;
     setTouched(true);
-    validateField(e);
+    // validateField(e);
   };
 
   const onInvalid = (event: React.InvalidEvent<HTMLInputElement>) => {
@@ -79,7 +80,7 @@ const TextInputFast = ({
           ref={inputRef}
           aria-label={label}
           aria-required={required}
-          onChange={_onChange}
+          // onChange={_onChange}
           onBlur={onBlur}
           placeholder={label}
           required={required}
