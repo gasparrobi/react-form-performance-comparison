@@ -18,7 +18,7 @@ const fields = [
     type: "text" as InputType,
     label: "e-mail",
     rules: { required: true, pattern: emailRegex },
-    specialValidationMessage: "Email format is invalid: example@domain.com",
+    errorMessage: "Email format is invalid: example@domain.com",
   },
   {
     name: "password",
@@ -83,7 +83,7 @@ const FastForm = ({
           pattern={field.rules.pattern}
           minLength={field.rules.minlength}
           isCheckmarkVisibleOnSuccess={true}
-          specialValidationMessage={field.specialValidationMessage}
+          errorMessage={field.errorMessage}
         />
       ))}
 

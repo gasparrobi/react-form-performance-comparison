@@ -11,7 +11,7 @@ interface TextInputProps {
   name: string;
   required?: boolean;
   isCheckmarkVisibleOnSuccess?: boolean;
-  specialValidationMessage?: string;
+  errorMessage?: string;
   [x: string]: unknown;
 }
 
@@ -19,7 +19,7 @@ const TextInputFast = ({
   required,
   label,
   isCheckmarkVisibleOnSuccess = true,
-  specialValidationMessage,
+  errorMessage,
   ...props
 }: TextInputProps): JSX.Element => {
   const [isInvalid, setIsInvalid] = useState(false);
@@ -105,7 +105,7 @@ const TextInputFast = ({
           role="alert"
           className="absolute left-0 top-[calc(100%+3px)] text-xs font-semibold text-red-700"
         >
-          {specialValidationMessage || (
+          {errorMessage || (
             <>
               This field is invalid: <i>invalid</i>
             </>
