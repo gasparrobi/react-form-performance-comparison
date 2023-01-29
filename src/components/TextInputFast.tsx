@@ -105,11 +105,7 @@ const TextInputFast = ({
           role="alert"
           className="absolute left-0 top-[calc(100%+3px)] text-xs font-semibold text-red-700"
         >
-          {errorMessage || (
-            <>
-              This field is invalid: <i>invalid</i>
-            </>
-          )}
+          {errorMessage || "This field is invalid"}
         </span>
       )}
     </div>
