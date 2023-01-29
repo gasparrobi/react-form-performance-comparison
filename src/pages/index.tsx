@@ -8,7 +8,7 @@ import { GithubIcon } from "../icons";
 
 const Home: NextPage = () => {
   const [isCheckmarkVisibleOnSuccess, setIsCheckmarkVisibleOnSuccess] =
-    useState(false);
+    useState(true);
 
   const onCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsCheckmarkVisibleOnSuccess(e.target.checked);
@@ -30,6 +30,7 @@ const Home: NextPage = () => {
             type="checkbox"
             name="tick"
             id="tick"
+            defaultChecked
             onChange={onCheckboxChange}
           />
           <label htmlFor="tick" className="font-semibold">
