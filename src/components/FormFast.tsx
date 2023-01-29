@@ -60,6 +60,7 @@ const FastForm = ({
 
   return (
     <form onSubmit={onSubmit} className="relative flex flex-col gap-6 p-6">
+      {/* for animation purposes on every render 👇 */}
       <div
         key={Math.random()}
         className=" -z-1 pointer-events-none absolute  left-0 top-0 h-full w-full animate-render-form rounded-lg border-4 border-gray-200"

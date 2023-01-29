@@ -30,6 +30,7 @@ const TextInputFast = ({
   renderCounter.current += 1;
 
   // with the :has selector there is no need to check for invalidity with js 🤯
+  // sadly it is not supported in firefox yet.
   // const validateField = (e: React.ChangeEvent | React.FocusEvent) => {
   //   const validity = (e.currentTarget as HTMLInputElement).validity.valid;
   //   if (isInvalid === validity) {

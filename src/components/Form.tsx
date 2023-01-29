@@ -84,17 +84,16 @@ const Form = ({
     console.log(data);
 
   return (
-    /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     <form
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       onSubmit={handleSubmit(onSubmit)}
       className="relative flex flex-col gap-6 p-6"
     >
+      {/* for animation purposes on every render 👇 */}
       <div
         key={Math.random()}
         className=" -z-1 pointer-events-none absolute  left-0 top-0 h-full w-full animate-render-form rounded-lg border-4 border-gray-200"
       ></div>
-      {/* register your input into the hook by invoking the "register" function */}
 
       <Dummy>react-hook-form</Dummy>
 

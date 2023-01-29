@@ -3,7 +3,8 @@ import Head from "next/head";
 import clsx from "clsx";
 import Form from "../components/Form";
 import FormFast from "../components/FormFast";
-import { useRef, useState } from "react";
+import { useState } from "react";
+import { GithubIcon } from "../icons";
 
 const Home: NextPage = () => {
   const [isCheckmarkVisibleOnSuccess, setIsCheckmarkVisibleOnSuccess] =
@@ -36,15 +37,39 @@ const Home: NextPage = () => {
           </label>
         </div>
         <div className="container grid grid-cols-1 place-items-center gap-12 px-4 py-16 sm:grid-cols-2 ">
-          <Form
-            key={isCheckmarkVisibleOnSuccess ? "form1" : "form2"}
-            isCheckmarkVisibleOnSuccess={isCheckmarkVisibleOnSuccess}
-          />
+          <div className="flex flex-col items-center gap-4">
+            <Form
+              key={isCheckmarkVisibleOnSuccess ? "form1" : "form2"}
+              isCheckmarkVisibleOnSuccess={isCheckmarkVisibleOnSuccess}
+            />
 
-          <FormFast
-            key={isCheckmarkVisibleOnSuccess ? "formFast1" : "formFast2"}
-            isCheckmarkVisibleOnSuccess={isCheckmarkVisibleOnSuccess}
-          />
+            <a
+              href="https://github.com/gasparrobi/react-form-performance-comparison/blob/main/src/components/Form.tsx"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="flex items-center gap-1 hover:underline"
+            >
+              <GithubIcon className="h-4 w-4" />
+              <span className="font-semibold">source code</span>
+            </a>
+          </div>
+
+          <div className="flex flex-col items-center gap-4">
+            <FormFast
+              key={isCheckmarkVisibleOnSuccess ? "formFast1" : "formFast2"}
+              isCheckmarkVisibleOnSuccess={isCheckmarkVisibleOnSuccess}
+            />
+
+            <a
+              href="https://github.com/gasparrobi/react-form-performance-comparison/blob/main/src/components/FormFast.tsx"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="flex items-center gap-1 hover:underline"
+            >
+              <GithubIcon className="h-4 w-4" />
+              <span className="font-semibold">source code</span>
+            </a>
+          </div>
         </div>
       </main>
     </>
