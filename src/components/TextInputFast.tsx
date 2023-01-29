@@ -52,7 +52,8 @@ const TextInputFast = ({
     inputRef.current?.blur();
   };
 
-  const _isInvalid = touched && isInvalid;
+  // with the :has selector there is no need to check for invalidity, we can just check for touched 🤯
+  // const _isInvalid = touched && isInvalid;
 
   return (
     <div className="relative">
@@ -60,8 +61,10 @@ const TextInputFast = ({
       <div
         className={twMerge(
           clsx(
-            "focus-within:shadow-text-input relative flex min-h-[60px] min-w-[240px] flex-col-reverse justify-center rounded-md border border-gray-300 px-3 py-2 transition-shadow sm:min-w-[300px]",
-            _isInvalid ? "[&:not(:focus-within)]:border-red-500" : ""
+            "focus-within:shadow-text-input peer relative flex min-h-[60px] min-w-[240px] flex-col-reverse justify-center rounded-md border border-gray-300 px-3 py-2 transition-shadow sm:min-w-[300px]",
+            touched
+              ? "[&:has(input:invalid:not(:focus-within))]:border-red-500"
+              : ""
           )
         )}
       >
@@ -100,10 +103,10 @@ const TextInputFast = ({
           ></span>
         )}
       </div>
-      {_isInvalid && (
+      {touched && (
         <span
           role="alert"
-          className="absolute left-0 top-[calc(100%+3px)] text-xs font-semibold text-red-700"
+          className="invisible absolute left-0 top-[calc(100%+3px)] text-xs font-semibold text-red-700 peer-[&:has(input:invalid)]:visible"
         >
           {errorMessage || "This field is invalid"}
         </span>
