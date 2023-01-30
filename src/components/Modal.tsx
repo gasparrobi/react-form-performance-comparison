@@ -1,5 +1,5 @@
-import * as React from "react";
 import * as Dialog from "@radix-ui/react-dialog";
+import { useEffect } from "react";
 
 interface RModalProps {
   title: string;
@@ -19,6 +19,15 @@ const RModal = ({
   // const [open, setOpen] = React.useState(false);
 
   const onClickOutside = (e: Event) => !closable && e.preventDefault();
+
+  useEffect(() => {
+    const currentlyFocusedElem = document.activeElement as HTMLElement;
+    console.log(currentlyFocusedElem);
+
+    return () => {
+      currentlyFocusedElem?.focus();
+    };
+  }, []);
 
   return (
     <Dialog.Root open={isOpen} onOpenChange={onClose}>
