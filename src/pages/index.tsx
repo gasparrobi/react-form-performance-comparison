@@ -37,7 +37,7 @@ const Home: NextPage = () => {
             always validate and show checkmark on success
           </label>
         </div>
-        <div className="container grid grid-cols-1 place-items-center gap-12 px-4 py-16 sm:grid-cols-2 ">
+        <div className="container grid grid-cols-1 place-items-center gap-12 px-4 py-4 sm:grid-cols-2 ">
           <div className="flex flex-col items-center gap-4">
             <Form
               key={isCheckmarkVisibleOnSuccess ? "form1" : "form2"}
