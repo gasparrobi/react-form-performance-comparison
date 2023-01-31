@@ -8,13 +8,13 @@ const RModal = dynamic(() => import("../components/Modal"), {
   ssr: false,
 });
 
-const Modal: NextPage = () => {
+const LazyModal: NextPage = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   return (
     <>
       <Head>
-        <title>Dynamically imported modal</title>
+        <title>Lazy loaded animated modal</title>
         <meta
           name="description"
           content="Compare react-form-hook vs custom implementation"
@@ -31,11 +31,14 @@ const Modal: NextPage = () => {
 
         {isModalVisible && (
           <RModal
-            title="Dynamic modal"
+            title="Hi! I'm lazy loaded!"
             isOpen={isModalVisible}
             onClose={() => setIsModalVisible(false)}
           >
-            <div>modal body</div>
+            <div className="flex flex-col gap-2">
+              <p>with enter and exit transitions 😎</p>
+              <p>and focus restored on close</p>
+            </div>
           </RModal>
         )}
       </main>
@@ -43,4 +46,4 @@ const Modal: NextPage = () => {
   );
 };
 
-export default Modal;
+export default LazyModal;

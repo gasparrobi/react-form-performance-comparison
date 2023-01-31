@@ -1,28 +1,39 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useTransition, animated, config } from "react-spring";
 
 interface RModalProps {
   title: string;
   children: React.ReactNode;
   isOpen: boolean;
   onClose: () => void;
-  closable?: boolean;
+  closableOnClickOutside?: boolean;
 }
 
 const RModal = ({
   title,
   children,
   isOpen,
-  closable = false,
+  closableOnClickOutside = true,
   onClose,
 }: RModalProps): React.ReactElement => {
-  // const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(isOpen);
 
-  const onClickOutside = (e: Event) => !closable && e.preventDefault();
+  const transitions = useTransition(open, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+    config: config.stiff,
+    onRest: () => {
+      if (!open) onClose();
+    },
+  });
+
+  const onClickOutside = (e: Event) =>
+    !closableOnClickOutside && e.preventDefault();
 
   useEffect(() => {
     const currentlyFocusedElem = document.activeElement as HTMLElement;
-    console.log(currentlyFocusedElem);
 
     return () => {
       currentlyFocusedElem?.focus();
@@ -30,34 +41,54 @@ const RModal = ({
   }, []);
 
   return (
-    <Dialog.Root open={isOpen} onOpenChange={onClose}>
-      {/* <Dialog.Trigger>Open</Dialog.Trigger> */}
-      <Dialog.Portal>
-        <div className="fixed inset-0 z-[1000] flex items-center justify-center">
-          <Dialog.Overlay className="fixed inset-0 bg-black/75 transition-opacity data-[state=open]:animate-fade-in" />
-          <Dialog.Content
-            className={`fixed mx-20 grid max-h-[calc(100%-20px)] w-[calc(100%-20px)] overflow-y-auto overflow-x-hidden rounded-md bg-white opacity-100 data-[state=open]:animate-fade-in sm:max-w-[480px]`}
-            onPointerDownOutside={onClickOutside}
-            onInteractOutside={onClickOutside}
-            onEscapeKeyDown={onClickOutside}
-          >
-            <Dialog.Title className="font-primary text-secondary flex bg-gray-200 px-14 py-8 text-2xl font-light">
-              {title}
-              <button
-                className="absolute right-5"
-                aria-label="Close modal"
-                onClick={onClose}
+    <Dialog.Root open={open} onOpenChange={() => setOpen(false)}>
+      {transitions((styles, item) =>
+        item ? (
+          <div className="fixed inset-0 z-[1000] flex items-center justify-center">
+            <Dialog.Overlay
+              forceMount
+              asChild
+              className="fixed inset-0 bg-black/75 transition-opacity "
+            >
+              <animated.div
+                style={{
+                  opacity: styles.opacity,
+                }}
+              />
+            </Dialog.Overlay>
+
+            <Dialog.Content
+              forceMount
+              asChild
+              className={`fixed mx-20 grid max-h-[calc(100%-20px)] w-[calc(100%-20px)] overflow-y-auto overflow-x-hidden rounded-md bg-white opacity-100  sm:max-w-[480px]`}
+              style={styles}
+              onPointerDownOutside={onClickOutside}
+              onInteractOutside={onClickOutside}
+              onEscapeKeyDown={onClickOutside}
+            >
+              <animated.div
+                style={{
+                  opacity: styles.opacity,
+                }}
               >
-                X
-              </button>
-            </Dialog.Title>
-            <Dialog.Description asChild className="p-5 sm:px-14 sm:py-8">
-              {children}
-            </Dialog.Description>
-            {/* <Dialog.Close>close</Dialog.Close> */}
-          </Dialog.Content>
-        </div>
-      </Dialog.Portal>
+                <Dialog.Title className="font-primary text-secondary flex bg-gray-200 px-14 py-8 text-2xl font-light">
+                  {title}
+                  <button
+                    className="absolute right-5"
+                    aria-label="Close modal"
+                    onClick={() => setOpen(false)}
+                  >
+                    X
+                  </button>
+                </Dialog.Title>
+                <Dialog.Description asChild className="p-5 sm:px-14 sm:py-8">
+                  {children}
+                </Dialog.Description>
+              </animated.div>
+            </Dialog.Content>
+          </div>
+        ) : null
+      )}
     </Dialog.Root>
   );
 };
