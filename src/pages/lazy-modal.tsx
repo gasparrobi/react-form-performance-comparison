@@ -18,7 +18,7 @@ const LazyModal: NextPage = () => {
         <title>Lazy loaded animated modal</title>
         <meta
           name="description"
-          content="Compare react-form-hook vs custom implementation"
+          content="Lazy loaded react modal with enter and exit transitions"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
