@@ -61,7 +61,6 @@ const RModal = ({
               forceMount
               asChild
               className={`fixed mx-20 grid max-h-[calc(100%-20px)] w-[calc(100%-20px)] overflow-y-auto overflow-x-hidden rounded-md bg-white opacity-100  sm:max-w-[480px]`}
-              style={styles}
               onPointerDownOutside={onClickOutside}
               onInteractOutside={onClickOutside}
               onEscapeKeyDown={onClickOutside}
