@@ -1,7 +1,7 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import clsx from "clsx";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { GithubIcon } from "../icons";
 
@@ -11,6 +11,12 @@ const RModal = dynamic(() => import("../components/Modal"), {
 
 const LazyModal: NextPage = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const modalRef = useRef<{ close: () => void }>(null);
+
+  const handleModalClose = () => {
+    console.log(modalRef);
+    modalRef.current?.close();
+  };
 
   return (
     <>
@@ -40,13 +46,20 @@ const LazyModal: NextPage = () => {
 
         {isModalVisible && (
           <RModal
+            ref={modalRef}
             title="Hi! I'm lazy loaded!"
-            isOpen={isModalVisible}
             onClose={() => setIsModalVisible(false)}
           >
             <div className="flex flex-col gap-2">
               <p>with enter and exit transitions 😎</p>
               <p>and focus restored on close 😎</p>
+              <button
+                type="button"
+                className="my-2 rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+                onClick={handleModalClose}
+              >
+                close
+              </button>
             </div>
           </RModal>
         )}
