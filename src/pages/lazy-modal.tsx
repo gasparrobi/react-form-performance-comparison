@@ -9,14 +9,15 @@ const RModal = dynamic(() => import("../components/Modal"), {
   ssr: false,
 });
 
+const RModalClose = dynamic(
+  () => import("../components/Modal").then((mod) => mod.RModalClose),
+  {
+    ssr: false,
+  }
+);
+
 const LazyModal: NextPage = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const modalRef = useRef<{ close: () => void }>(null);
-
-  const handleModalClose = () => {
-    console.log(modalRef);
-    modalRef.current?.close();
-  };
 
   return (
     <>
@@ -46,20 +47,17 @@ const LazyModal: NextPage = () => {
 
         {isModalVisible && (
           <RModal
-            ref={modalRef}
             title="Hi! I'm lazy loaded!"
             onClose={() => setIsModalVisible(false)}
           >
             <div className="flex flex-col gap-2">
               <p>with enter and exit transitions 😎</p>
               <p>and focus restored on close 😎</p>
-              <button
-                type="button"
-                className="my-2 rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
-                onClick={handleModalClose}
-              >
-                close
-              </button>
+              <RModalClose>
+                <button className="my-2 rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700">
+                  Close
+                </button>
+              </RModalClose>
             </div>
           </RModal>
         )}
