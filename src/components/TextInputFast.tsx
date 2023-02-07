@@ -64,9 +64,7 @@ const TextInputFast = ({
         className={twMerge(
           clsx(
             "focus-within:shadow-text-input peer relative flex min-h-[60px] min-w-[240px] flex-col-reverse justify-center rounded-md border border-gray-300 px-3 py-2 transition-shadow sm:min-w-[300px]",
-            touched
-              ? "[&:has(input:invalid:not(:focus-within))]:border-red-500"
-              : ""
+            touched ? "[&:has(input:invalid)]:border-red-500" : ""
           )
         )}
       >

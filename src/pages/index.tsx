@@ -5,6 +5,7 @@ import Form from "../components/Form";
 import FormFast from "../components/FormFast";
 import { useState } from "react";
 import { GithubIcon } from "../icons";
+import FormFormik from "../components/FormFormik";
 
 const Home: NextPage = () => {
   const [isCheckmarkVisibleOnSuccess, setIsCheckmarkVisibleOnSuccess] =
@@ -37,7 +38,7 @@ const Home: NextPage = () => {
             always validate and show checkmark on success
           </label>
         </div>
-        <div className="container grid grid-cols-1 place-items-center gap-12 px-4 py-4 sm:grid-cols-2 ">
+        <div className="container grid grid-cols-1 place-items-center gap-12 px-4 py-4 lg:grid-cols-3 ">
           <div className="flex flex-col items-center gap-4">
             <Form
               key={isCheckmarkVisibleOnSuccess ? "form1" : "form2"}
@@ -62,6 +63,22 @@ const Home: NextPage = () => {
 
             <a
               href="https://github.com/gasparrobi/react-form-performance-comparison/blob/main/src/components/FormFast.tsx"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="flex items-center gap-1 hover:underline"
+            >
+              <GithubIcon className="h-4 w-4" />
+            </a>
+          </div>
+
+          <div className="flex flex-col items-center gap-4">
+            <FormFormik
+              key={isCheckmarkVisibleOnSuccess ? "formFast1" : "formFast2"}
+              isCheckmarkVisibleOnSuccess={isCheckmarkVisibleOnSuccess}
+            />
+
+            <a
+              href="#"
               target="_blank"
               rel="noreferrer noopener"
               className="flex items-center gap-1 hover:underline"
