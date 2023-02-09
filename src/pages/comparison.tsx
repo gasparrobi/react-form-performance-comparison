@@ -31,7 +31,7 @@ const Comparison: NextPage = () => {
             {`You don't need a React Form Validation library`}
           </h1>
         </div>
-        <div className="grid grid-cols-[min-content,1fr]  rounded-lg border-4 border-slate-800">
+        <div className=" mb-20 grid grid-cols-[min-content,1fr]  rounded-lg border-4 border-slate-800">
           <div className="flex h-full flex-col items-center justify-center gap-4 bg-transparent p-8">
             <div
               role="radio"
