@@ -6,10 +6,10 @@ const RenderCount = ({
   children: React.ReactNode;
 }): JSX.Element => {
   return (
-    <div className="flex w-full justify-end gap-1 text-right text-xs font-light text-gray-500">
+    <div className="flex w-full justify-end gap-1 text-right text-xs font-light text-slate-200">
       <RefreshIcon
         key={Math.random()}
-        color="black"
+        color="text-slate-200"
         width="12"
         className="animate-rotate"
       />{" "}

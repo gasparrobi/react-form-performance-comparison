@@ -8,13 +8,6 @@ import { GithubIcon } from "../icons";
 import FormFormik from "../components/FormFormik";
 
 const Home: NextPage = () => {
-  const [isCheckmarkVisibleOnSuccess, setIsCheckmarkVisibleOnSuccess] =
-    useState(true);
-
-  const onCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsCheckmarkVisibleOnSuccess(e.target.checked);
-  };
-
   return (
     <>
       <Head>
@@ -26,24 +19,9 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center bg-white ">
-        <div className="mt-10 flex items-center gap-2 p-2 leading-tight sm:mt-4">
-          <input
-            type="checkbox"
-            name="tick"
-            id="tick"
-            defaultChecked
-            onChange={onCheckboxChange}
-          />
-          <label htmlFor="tick" className="font-semibold">
-            always validate and show checkmark on success
-          </label>
-        </div>
         <div className="container grid grid-cols-1 place-items-center gap-12 px-4 py-4 lg:grid-cols-3 ">
           <div className="flex flex-col items-center gap-4">
-            <Form
-              key={isCheckmarkVisibleOnSuccess ? "form1" : "form2"}
-              isCheckmarkVisibleOnSuccess={isCheckmarkVisibleOnSuccess}
-            />
+            <Form />
 
             <a
               href="https://github.com/gasparrobi/react-form-performance-comparison/blob/main/src/components/Form.tsx"
@@ -56,10 +34,7 @@ const Home: NextPage = () => {
           </div>
 
           <div className="flex flex-col items-center gap-4">
-            <FormFast
-              key={isCheckmarkVisibleOnSuccess ? "formFast1" : "formFast2"}
-              isCheckmarkVisibleOnSuccess={isCheckmarkVisibleOnSuccess}
-            />
+            <FormFast />
 
             <a
               href="https://github.com/gasparrobi/react-form-performance-comparison/blob/main/src/components/FormFast.tsx"
@@ -72,10 +47,7 @@ const Home: NextPage = () => {
           </div>
 
           <div className="flex flex-col items-center gap-4">
-            <FormFormik
-              key={isCheckmarkVisibleOnSuccess ? "formFast1" : "formFast2"}
-              isCheckmarkVisibleOnSuccess={isCheckmarkVisibleOnSuccess}
-            />
+            <FormFormik />
 
             <a
               href="#"

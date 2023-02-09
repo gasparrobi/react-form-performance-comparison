@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import TextInput from "./TextInput";
 import { type ReactNode, useRef } from "react";
 import Dummy from "./Dummy";
@@ -9,6 +12,10 @@ interface FormField {
   label: string;
   rules: { required: boolean; minLength?: number; pattern?: RegExp };
   validator: (value: string) => boolean;
+}
+
+interface FormValues {
+  [key: string]: string;
 }
 
 const emailRegex = new RegExp("^[a-zA-Z0-9].+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$");
@@ -45,11 +52,7 @@ const fields: FormField[] = [
   },
 ];
 
-const FormFormik = ({
-  isCheckmarkVisibleOnSuccess,
-}: {
-  isCheckmarkVisibleOnSuccess: boolean;
-}): JSX.Element => {
+const FormFormik = (): JSX.Element => {
   const renderCounter = useRef(0);
   renderCounter.current += 1;
 
@@ -59,8 +62,8 @@ const FormFormik = ({
         (acc, field) => ({ ...acc, [field.name]: "" }),
         {}
       )}
-      validate={(values) => {
-        const errors = {};
+      validate={(values: FormValues) => {
+        const errors: { [key: string]: string } = {};
         fields.forEach((field) => {
           if (field.rules.required && !values[field.name]) {
             errors[field.name] = "Required";
@@ -107,10 +110,10 @@ const FormFormik = ({
           {/* for animation purposes on every render 👇 */}
           <div
             key={Math.random()}
-            className=" -z-1 pointer-events-none absolute  left-0 top-0 h-full w-full animate-render-form rounded-lg border-4 border-gray-200"
+            className=" -z-1 pointer-events-none absolute  left-0 top-0 h-full w-full animate-render-form"
           ></div>
 
-          <Dummy>Formik form</Dummy>
+          <Dummy>Formik</Dummy>
 
           {fields.map((field) => (
             <div className="relative" key={field.name}>
@@ -120,11 +123,13 @@ const FormFormik = ({
                 label={field.label}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 isInvalid={!!errors[field.name] && touched[field.name]}
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                 isValid={!errors[field.name] && values[field.name].length > 0}
               />
               {errors[field.name] && touched[field.name] && (
-                <span className="absolute left-0 top-[calc(100%+3px)] text-xs font-semibold text-red-700">
+                <span className="absolute left-0 top-[calc(100%+3px)] text-xs font-semibold text-orange-400">
                   <span className="italic">{errors[field.name]}</span>
                 </span>
               )}
@@ -133,7 +138,7 @@ const FormFormik = ({
 
           <button
             type="submit"
-            className="mt-4 rounded-md bg-slate-500 p-4 text-white"
+            className="mt-4 rounded-md bg-indigo-500 py-3 text-white transition-colors hover:bg-indigo-400"
           >
             submit
           </button>

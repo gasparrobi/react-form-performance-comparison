@@ -8,12 +8,12 @@ const Dummy = ({ children }: { children: React.ReactNode }): JSX.Element => {
   return (
     <div className="cursor-default">
       <RenderCount> {renderCounter.current} </RenderCount>
-      <div className="relative w-full border border-gray-200 bg-gradient-to-r from-orange-400 to-purple-600 px-4 py-2 text-center ">
+      <div className="0 relative w-full overflow-hidden rounded-md px-4 py-2 text-center">
         <div
           key={Math.random()}
           className=" -z-1 pointer-events-none absolute  left-0 top-0 h-full w-full animate-render"
         ></div>
-        <p className="font-semibold text-white">{children}</p>
+        <p className="font-semibold text-slate-400">{children}</p>
       </div>
     </div>
   );

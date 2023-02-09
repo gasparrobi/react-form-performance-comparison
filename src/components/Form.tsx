@@ -45,11 +45,7 @@ const fields: FormField[] = [
   },
 ];
 
-const Form = ({
-  isCheckmarkVisibleOnSuccess,
-}: {
-  isCheckmarkVisibleOnSuccess: boolean;
-}): JSX.Element => {
+const Form = (): JSX.Element => {
   const {
     register,
     handleSubmit,
@@ -68,12 +64,10 @@ const Form = ({
   //   password: watch("password") as string,
   //   phoneNumber: watch("phoneNumber") as string,
   // }; // same 👆👇
-  const watchers = isCheckmarkVisibleOnSuccess
-    ? fields.reduce((acc: { [x: string]: unknown }, field) => {
-        acc[field.name] = watch(field.name) as unknown;
-        return acc;
-      }, {})
-    : {};
+  const watchers = fields.reduce((acc: { [x: string]: unknown }, field) => {
+    acc[field.name] = watch(field.name) as unknown;
+    return acc;
+  }, {});
 
   const getIsValid = (name: string): boolean | undefined => {
     const field = fields.find((field) => field.name === name);
@@ -92,7 +86,7 @@ const Form = ({
       {/* for animation purposes on every render 👇 */}
       <div
         key={Math.random()}
-        className=" -z-1 pointer-events-none absolute  left-0 top-0 h-full w-full animate-render-form rounded-lg border-4 border-gray-200"
+        className=" -z-1 pointer-events-none absolute  left-0 top-0 h-full w-full animate-render-form "
       ></div>
 
       <Dummy>react-hook-form</Dummy>
@@ -105,10 +99,10 @@ const Form = ({
             type={field.type}
             label={field.label}
             isInvalid={Boolean(errors[field.name])}
-            isValid={isCheckmarkVisibleOnSuccess && getIsValid(field.name)}
+            isValid={getIsValid(field.name)}
           />
           {errors[field.name] && (
-            <span className="absolute left-0 top-[calc(100%+3px)] text-xs font-semibold text-red-700">
+            <span className="absolute left-0 top-[calc(100%+3px)] text-xs font-normal text-orange-400">
               This field is invalid:{" "}
               <span className="italic">
                 {errors[field.name]?.type as ReactNode}
@@ -120,7 +114,7 @@ const Form = ({
 
       <button
         type="submit"
-        className="mt-4 rounded-md bg-slate-500 p-4 text-white"
+        className="mt-4 rounded-md bg-indigo-500 py-3 text-white transition-colors hover:bg-indigo-400"
       >
         submit
       </button>

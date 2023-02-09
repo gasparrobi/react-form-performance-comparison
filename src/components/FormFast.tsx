@@ -34,11 +34,7 @@ const fields = [
   },
 ];
 
-const FastForm = ({
-  isCheckmarkVisibleOnSuccess,
-}: {
-  isCheckmarkVisibleOnSuccess: boolean;
-}): JSX.Element => {
+const FastForm = (): JSX.Element => {
   const renderCounter = useRef(0);
   renderCounter.current += 1;
 
@@ -63,10 +59,10 @@ const FastForm = ({
       {/* for animation purposes on every render 👇 */}
       <div
         key={Math.random()}
-        className=" -z-1 pointer-events-none absolute  left-0 top-0 h-full w-full animate-render-form rounded-lg border-4 border-gray-200"
+        className=" -z-1 pointer-events-none absolute  left-0 top-0 h-full w-full animate-render-form "
       ></div>
 
-      <Dummy>Custom Form</Dummy>
+      <Dummy>Form Fast</Dummy>
 
       {fields.map((field) => (
         <TextInputFast
@@ -85,7 +81,7 @@ const FastForm = ({
 
       <button
         type="submit"
-        className="mt-4 rounded-md bg-slate-500 p-4 text-white"
+        className="mt-4 rounded-md bg-indigo-500 py-3 text-white transition-colors hover:bg-indigo-400"
       >
         submit
       </button>

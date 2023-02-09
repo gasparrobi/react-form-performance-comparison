@@ -21,8 +21,8 @@ const TextInput = forwardRef(
         <div
           // key={Math.random()}
           className={clsx(
-            "relative flex min-h-[60px] min-w-[240px] flex-col-reverse justify-center overflow-hidden rounded-md border border-gray-300 px-3 py-2 shadow-sm  focus-within:shadow-inner sm:min-w-[300px]",
-            isInvalid ? "border-red-500 " : ""
+            "relative flex min-h-[60px] min-w-[240px] flex-col-reverse justify-center overflow-hidden rounded-md border border-slate-500 px-3 py-2 shadow-sm  focus-within:shadow-inner sm:min-w-[300px]",
+            isInvalid ? "border-orange-400 " : ""
           )}
         >
           <div
@@ -32,14 +32,14 @@ const TextInput = forwardRef(
           <input
             ref={ref as unknown as React.Ref<HTMLInputElement>}
             className={clsx(
-              "peer z-10 block w-full border-0 bg-transparent p-0 text-base text-gray-900 placeholder-gray-500 focus:ring-0"
+              "peer z-10 block w-full border-0 bg-transparent p-0 text-base text-slate-200 placeholder-slate-400 focus:ring-0"
             )}
             placeholder={props.label}
             {...props}
           />
           <label
             htmlFor="email"
-            className={` transition-opacity,transform block text-xs font-bold uppercase text-gray-400
+            className={` transition-opacity,transform block text-xs font-bold uppercase text-slate-400
           duration-200 peer-placeholder-shown:h-0 peer-placeholder-shown:-translate-y-full peer-placeholder-shown:opacity-0`}
           >
             {props.label}

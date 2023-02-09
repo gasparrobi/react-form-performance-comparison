@@ -63,8 +63,8 @@ const TextInputFast = ({
       <div
         className={twMerge(
           clsx(
-            "focus-within:shadow-text-input peer relative flex min-h-[60px] min-w-[240px] flex-col-reverse justify-center rounded-md border border-gray-300 px-3 py-2 transition-shadow sm:min-w-[300px]",
-            touched ? "[&:has(input:invalid)]:border-red-500" : ""
+            "focus-within:shadow-text-input peer relative flex min-h-[60px] min-w-[240px] flex-col-reverse justify-center rounded-md border border-slate-500 px-3 py-2 transition-shadow sm:min-w-[300px]",
+            touched ? "[&:has(input:invalid)]:border-orange-400" : ""
           )
         )}
       >
@@ -74,7 +74,7 @@ const TextInputFast = ({
         ></div>
         <input
           className={clsx(
-            `peer z-10 block w-full appearance-none border-0 bg-transparent p-0 text-base text-gray-900 placeholder-gray-500 focus:ring-0 focus-visible:outline-none`
+            `peer z-10 block w-full appearance-none border-0 bg-transparent p-0 text-base text-slate-200 placeholder-slate-400 focus:ring-0 focus-visible:outline-none`
           )}
           ref={inputRef}
           aria-label={label}
@@ -89,7 +89,7 @@ const TextInputFast = ({
 
         <label
           className={`transition-opacity,transform block text-xs font-bold uppercase
-        text-gray-400 duration-200 peer-placeholder-shown:h-0 peer-placeholder-shown:-translate-y-full peer-placeholder-shown:opacity-0`}
+        text-slate-400 duration-200 peer-placeholder-shown:h-0 peer-placeholder-shown:-translate-y-full peer-placeholder-shown:opacity-0`}
         >
           {label}
         </label>
@@ -106,7 +106,7 @@ const TextInputFast = ({
       {touched && (
         <span
           role="alert"
-          className="invisible absolute left-0 top-[calc(100%+3px)] text-xs font-semibold text-red-700 peer-[&:has(input:invalid)]:visible"
+          className="invisible absolute left-0 top-[calc(100%+3px)] text-xs font-normal text-orange-400 peer-[&:has(input:invalid)]:visible"
         >
           {errorMessage || "This field is invalid"}
         </span>
