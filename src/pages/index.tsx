@@ -18,7 +18,7 @@ const Home: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-white ">
+      <main className="flex min-h-screen flex-col items-center justify-center bg-[#363636] ">
         <div className="container grid grid-cols-1 place-items-center gap-12 px-4 py-4 lg:grid-cols-3 ">
           <div className="flex flex-col items-center gap-4">
             <Form />
