@@ -1,9 +1,10 @@
 import { useRef } from "react";
 import Dummy from "./Dummy";
 import TextInputFast, { type InputType } from "./TextInputFast";
+import { error } from "console";
 
 const emailRegex =
-  '^(([^<>()[\\].,;:\\s@"]+(.[^<>()[\\].,;:\\s@"]+)*)|(".+"))@(([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3})|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,256}))$';
+  /^(([^<>()[\\].,;:\\s@"]+(.[^<>()[\\].,;:\\s@"]+)*)|(".+"))@(([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3})|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,256}))$/;
 const phoneRegex = "^[0-9]{8,}$";
 
 const fields = [
@@ -25,12 +26,14 @@ const fields = [
     type: "password" as InputType,
     label: "password",
     rules: { required: true, minlength: 8 },
+    errorMessage: "Password must be at least 8 characters long",
   },
   {
     name: "phoneNumber",
     type: "text" as InputType,
     label: "phone number",
     rules: { required: true, pattern: phoneRegex },
+    errorMessage: "Phone number must be at least 8 digits long",
   },
 ];
 

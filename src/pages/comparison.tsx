@@ -28,7 +28,7 @@ const Comparison: NextPage = () => {
       <main className="flex min-h-screen flex-col items-center gap-14 bg-white ">
         <div className="flex w-full justify-center bg-slate-800 p-4 text-center">
           <h1 className="max-w-4xl p-8 text-6xl font-black leading-tight text-slate-200">
-            {`You don't need a React Form Validation library`}
+            {`You don't need a Form Validation library`}
           </h1>
         </div>
         <div className=" mb-20 grid grid-cols-[min-content,1fr]  rounded-lg border-4 border-slate-800">

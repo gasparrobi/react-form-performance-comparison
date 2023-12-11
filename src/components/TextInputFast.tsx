@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { twMerge } from "tailwind-merge";
 import RenderCount from "./RenderCount";
 
@@ -22,31 +22,10 @@ const TextInputFast = ({
   errorMessage,
   ...props
 }: TextInputProps): JSX.Element => {
-  // const [isInvalid, setIsInvalid] = useState(false);
-  const [touched, setTouched] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const renderCounter = useRef(0);
   renderCounter.current += 1;
-
-  // with the :has selector there is no need to check for invalidity with js 🤯
-  // sadly it is not supported in firefox yet.
-  // const validateField = (e: React.ChangeEvent | React.FocusEvent) => {
-  //   const validity = (e.currentTarget as HTMLInputElement).validity.valid;
-  //   if (isInvalid === validity) {
-  //     setIsInvalid(!validity);
-  //   }
-  // };
-
-  // const _onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   touched && validateField(e);
-  // };
-
-  const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    if (e.currentTarget.validity.valid) return;
-    setTouched(true);
-    // validateField(e);
-  };
 
   const onInvalid = (event: React.InvalidEvent<HTMLInputElement>) => {
     event?.preventDefault();
@@ -57,15 +36,14 @@ const TextInputFast = ({
   // with the :has selector there is no need to check for invalidity, we can just check for touched 🤯
   // const _isInvalid = touched && isInvalid;
 
+  // with the user-invalid pseudo class we don't even have to check for touched 🤯
+
   return (
     <div className="relative">
       <RenderCount> {renderCounter.current} </RenderCount>
       <div
         className={twMerge(
-          clsx(
-            "focus-within:shadow-text-input peer relative flex min-h-[60px] min-w-[240px] flex-col-reverse justify-center rounded-md border border-slate-500 px-3 py-2 transition-shadow sm:min-w-[300px]",
-            touched ? "[&:has(input:invalid)]:border-orange-400" : ""
-          )
+          "focus-within:shadow-text-input peer relative flex min-h-[60px] min-w-[240px] flex-col-reverse justify-center rounded-md border border-slate-500 px-3 py-2 transition-shadow sm:min-w-[300px] [&:has(input:user-invalid)]:border-orange-400"
         )}
       >
         <div
@@ -79,8 +57,6 @@ const TextInputFast = ({
           ref={inputRef}
           aria-label={label}
           aria-required={required}
-          // onChange={_onChange}
-          onBlur={onBlur}
           placeholder={label}
           required={required}
           onInvalid={onInvalid}
@@ -103,14 +79,13 @@ const TextInputFast = ({
           ></span>
         )}
       </div>
-      {touched && (
-        <span
-          role="alert"
-          className="invisible absolute left-0 top-[calc(100%+3px)] text-xs font-normal text-orange-400 peer-[&:has(input:invalid)]:visible"
-        >
-          {errorMessage || "This field is invalid"}
-        </span>
-      )}
+
+      <span
+        role="alert"
+        className="invisible absolute left-0 top-[calc(100%+3px)] text-xs font-normal text-orange-400 peer-[&:has(input:user-invalid)]:visible"
+      >
+        {errorMessage || "This field is invalid"}
+      </span>
     </div>
   );
 };
